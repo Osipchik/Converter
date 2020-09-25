@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">Converter</string>
+
+    <string name="item1">Weight</string>
+    <string name="item2">Temperature</string>
+    <string name="item3">Distance</string>
+    <string name="decimalSeparator">.</string>
+
+    <string-array name="measures">
+        <item>currency</item>
+        <item>weight</item>
+        <item>distance</item>
+    </string-array>
+
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>GBP</item>
+        <item>EUR</item>
+    </string-array>
+    <string-array name="weight">
+        <item>Pound</item>
+        <item>Ounce</item>
+        <item>Grain</item>
+        <item>Kilogram</item>
+    </string-array>
+    <string-array name="distance">
+        <item>Meter</item>
+        <item>Foot</item>
+        <item>Mile</item>
+        <item>Fathom</item>
+    </string-array>
+
+    <string name="USDUSD">1</string>
+    <string name="USDGBP">0.77</string>
+    <string name="USDEUR">0.84</string>
+
+    <string name="GBPUSD">1.29</string>
+    <string name="GBPGBP">1</string>
+    <string name="GBPEUR">1.09</string>
+
+    <string name="EURUSD">1.18</string>
+    <string name="EURGBP">0.92</string>
+    <string name="EUREUR">1</string>
+
+
+    <string name="PoundPound">1</string>
+    <string name="PoundOunce">16</string>
+    <string name="PoundGrain">7000</string>
+    <string name="PoundKilogram">0.453592</string>
+
+    <string name="OuncePound">0.0625</string>
+    <string name="OunceOunce">1</string>
+    <string name="OunceGrain">437.5</string>
+    <string name="OunceKilogram">0.0283495</string>
+
+    <string name="GrainPound">0.000142857</string>
+    <string name="GrainOunce">0.00228571</string>
+    <string name="GrainGrain">1</string>
+    <string name="GrainKilogram">0.0000648</string>
+
+    <string name="KilogramPound">2.20462</string>
+    <string name="KilogramOunce">35.274</string>
+    <string name="KilogramGrain">15432.4</string>
+    <string name="KilogramKilogram">1</string>
+
+
+    <string name="MeterMeter">1</string>
+    <string name="MeterFoot">3.28084</string>
+    <string name="MeterMile">0.000621371</string>
+    <string name="MeterFathom">0.468969</string>
+
+    <string name="FootMeter">0.3048</string>
+    <string name="FootFoot">1</string>
+    <string name="FootMile">0.000189394</string>
+    <string name="FootFathom">0.14285714</string>
+
+    <string name="MileMeter">1609.34</string>
+    <string name="MileFoot">5280</string>
+    <string name="MileMile">1</string>
+    <string name="MileFathom">754.2838</string>
+
+    <string name="FathomMeter">2.1336</string>
+    <string name="FathomFoot">6.972554</string>
+    <string name="FathomMile">0.013306</string>
+    <string name="FathomFathom">1</string>
+</resources>
