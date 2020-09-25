@@ -1,38 +1,21 @@
 apply plugin: 'com.android.application'
 
-def getVersionTag = { variant ->
-    def stdout
-    try {
-        stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine "git", "describe", "--match", "${variant}/*", "--long"
-            standardOutput = stdout
-        }
-        def longTag = stdout.toString().trim()
-
-        return longTag.substring(longTag.indexOf('/') + 1, longTag.indexOf('-'))
-    } catch (exception) {
-        return "0.0.1";
-    }
+static def getVersionNameArray() {
+    def result = "git rev-list HEAD --count".execute().text.trim()
+    return result.toInteger()
 }
+//
+//static def generateVersionName(versionCode){
+//    def versionCodeArray = versionCode.split(".").collect { it as int }
+//    return versionCodeArray[0] * 10000 + versionCodeArray[1] * 100 * versionCodeArray[2]
+//}
+//
+//ext {
+//    getVersionNameArray = this.&getVersionNameArray
+//    generateVersionName = this.&generateVersionName
+//}
 
-def getVersionCode = { tag ->
-    def parts = tag.tokenize('.')
-    if(parts.size() != 3 || parts[1].length() > 2 || parts[2].length() > 2) {
-        throw new RuntimeException("Invalid version tag \"${tag}\", format \"x.y.z\" expected.")
-    }
-    if(parts[1].length() == 1) {
-        parts[1] = "0" + parts[1]
-    }
-    if(parts[2].length() == 1) {
-        parts[2] = "0" + parts[2]
-    }
-    return Integer.parseInt(parts[0] + parts[1] + parts[2])
-}
-
-def getVersionName = { tag ->
-    return tag
-}
+def versionNameArray = getVersionNameArray()
 
 android {
     compileSdkVersion 30
@@ -42,8 +25,8 @@ android {
         applicationId "com.example.converter"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode generateVersionCode()
-        versionName "${majorVersion}.${generateVersionCode()}"
+        versionCode 1
+        versionName '0.1'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

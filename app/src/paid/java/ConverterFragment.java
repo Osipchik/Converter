@@ -32,6 +32,8 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
     Spinner spinnerConvertTo;
     Spinner spinnerMeasures;
 
+    int fromState = -1, toState = -1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +64,19 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
         textResult = view.findViewById(R.id.edit_text_result);
         converterViewModel.getDataInput().observe(requireActivity(), i -> textInput.setText(i));
         converterViewModel.getDataResult().observe(requireActivity(), i -> textResult.setText(i));
+
+        if (savedInstanceState != null){
+            fromState = Integer.parseInt(savedInstanceState.getString("fromState"));
+            toState = Integer.parseInt(savedInstanceState.getString("toState"));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("fromState", String.valueOf(spinnerConvertFrom.getSelectedItemPosition()));
+        outState.putString("toState", String.valueOf(spinnerConvertTo.getSelectedItemPosition()));
+
+        super.onSaveInstanceState(outState);
     }
 
     private void swapSpinners(){
@@ -88,22 +103,20 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == spinnerMeasures){
-            String measure = parent.getItemAtPosition(position).toString();
+            int convertFrom = 0, convertTo = 0;
 
-            switch (measure){
-                case "weight":
-                    CreateSpinner(R.array.weight, spinnerConvertFrom);
-                    CreateSpinner(R.array.weight, spinnerConvertTo);
+            switch (parent.getItemAtPosition(position).toString()){
+                case "weight": convertFrom = convertTo = R.array.weight;
                     break;
-                case "currency":
-                    CreateSpinner(R.array.currencies, spinnerConvertFrom);
-                    CreateSpinner(R.array.currencies, spinnerConvertTo);
+                case "currency": convertFrom = convertTo = R.array.currencies;
                     break;
-                case "distance":
-                    CreateSpinner(R.array.distance, spinnerConvertFrom);
-                    CreateSpinner(R.array.distance, spinnerConvertTo);
+                case "distance": convertFrom = convertTo = R.array.distance;
                     break;
             }
+
+            CreateSpinner(convertFrom, spinnerConvertFrom);
+            CreateSpinner(convertTo, spinnerConvertTo);
+            setSpinnersState();
         }
         else {
             setConverterFactor();
@@ -123,11 +136,10 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
         toast.show();
     }
 
-
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        int asd = spinnerConvertTo.getSelectedItemPosition();
-//        outState.putInt("ConvertTo", asd);
-//    }
+    private void setSpinnersState(){
+        if (fromState > -1){
+            spinnerConvertFrom.setSelection(fromState);
+            spinnerConvertTo.setSelection(toState);
+        }
+    }
 }
